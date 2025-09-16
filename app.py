@@ -3,10 +3,11 @@ from flask_cors import CORS
 import os
 from supabase import create_client, Client
 from functools import wraps
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY") or 'dev-key-for-campus-live'
-
+load_dotenv()
 # Supabase configuration
 # TODO: Set these as environment variables
 url: str = "https://zcnxzeccwiwgpmhwudgi.supabase.co" #os.environ.get("SUPABASE_URL")
@@ -162,4 +163,5 @@ def update_status():
     return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-  app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
