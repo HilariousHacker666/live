@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Campus Live Dashboard{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-form">
+        <h2>Create an Account</h2>
+        
+        <form id="register-form">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="6">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="student-id">Student ID (Optional)</label>
+                <input type="text" id="student-id" name="student-id">
+            </div>
+            
+            <button type="submit" class="auth-btn">Register</button>
+        </form>
+        
+        <div class="auth-links">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+        
+        <div class="social-login">
+            <p>Or register with:</p>
+            <button class="social-btn google-btn">Google</button>
+            <button class="social-btn github-btn">GitHub</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('register-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    
+    if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: {
+                    full_name: document.getElementById('fullname').value,
+                    student_id: document.getElementById('student-id').value
+                }
+            }
+        });
+        
+        if (error) throw error;
+        
+        alert('Registration successful! Please check your email for verification.');
+        window.location.href = "{{ url_for('login') }}";
+    } catch (error) {
+        alert('Registration failed: ' + error.message);
+    }
+});
+</script>
+{% endblock %}

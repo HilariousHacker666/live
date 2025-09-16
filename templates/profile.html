@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - Campus Live Dashboard{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>My Profile</h2>
+    
+    <div class="profile-content">
+        <div class="profile-sidebar">
+            <div class="profile-picture">
+                <img src="{{ url_for('static', filename='images/default-avatar.png') }}" alt="Profile Picture">
+            </div>
+            
+        </div>
+        
+        <div class="profile-details">
+            <form class="profile-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" value="{{ user.fullname }}" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" name="student-id" value="{{ user.student_id }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="major">Major/Department</label>
+                    <input type="text" id="major" name="major" value="{{ user.major }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" name="bio" rows="4">{{ user.bio }}</textarea>
+                </div>
+                
+                <button type="submit" class="save-btn">Save Changes</button>
+            </form>
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Live Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Campus Live Dashboard</h1>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search resources...">
+            <button id="search-btn">Search</button>
+        </div>
+        <div class="auth-buttons">
+            <a href="{{ url_for('about') }}" class="button">About</a>
+            <a href="{{ url_for('login') }}" class="button">Login</a>
+            <a href="{{ url_for('register') }}" class="button">Register</a>
+            <a href="{{ url_for('profile') }}" class="button">Profile</a>
+            <a href="{{ url_for('admin') }}" class="button">Admin</a>
+        </div>
+    </header>
+
+    <main>
+        <div id="resources-container">
+            <!-- Resources will be loaded here dynamically -->
+        </div>
+
+        <div id="update-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Update Resource Status</h2>
+                <form id="update-form">
+                    <input type="hidden" id="resource-id">
+                    <div class="form-group">
+                        <label for="status-message">Status Message:</label>
+                        <textarea id="status-message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="crowd-level">Crowd Level:</label>
+                        <select id="crowd-level">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="chips-available">Chips Available:</label>
+                        <select id="chips-available">
+                            <option value="Available">Available</option>
+                            <option value="Not Available">Not Available</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="queue-length">Queue Length:</label>
+                        <select id="queue-length">
+                            <option value="No Queue">No Queue</option>
+                            <option value="Short">Short Queue</option>
+                            <option value="Long">Long Queue</option>
+                        </select>
+                    </div>
+                    <button type="submit">Update Status</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>console.log('Supabase CDN loaded');</script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

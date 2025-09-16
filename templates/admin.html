@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - Campus Live Dashboard{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h2>Admin Panel</h2>
+    
+    <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="users">Users</button>
+        <button class="tab-btn" data-tab="resources">Resources</button>
+        <button class="tab-btn" data-tab="reports">Reports</button>
+    </div>
+    
+    <div class="tab-content" id="users-tab">
+        <h3>User Management</h3>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in admin_data %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.fullname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ user.status }}</td>
+                        <td>
+                            <button class="action-btn edit-btn">Edit</button>
+                            <button class="action-btn delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="tab-content hidden" id="resources-tab">
+        <h3>Resource Management</h3>
+        <button class="add-resource-btn">Add New Resource</button>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resource in resources_data %}
+                    <tr>
+                        <td>{{ resource.id }}</td>
+                        <td>{{ resource.name }}</td>
+                        <td>{{ resource.type }}</td>
+                        <td>{{ resource.status }}</td>
+                        <td>{{ resource.last_updated }}</td>
+                        <td>
+                            <button class="action-btn edit-btn">Edit</button>
+                            <button class="action-btn delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="tab-content hidden" id="reports-tab">
+        <h3>System Reports</h3>
+        <div class="report-cards">
+            <div class="report-card">
+                <h4>Total Users</h4>
+                <p class="report-number"></p>
+            </div>
+            <div class="report-card">
+                <h4>Active Today</h4>
+                <p class="report-number"></p>
+            </div>
+            <div class="report-card">
+                <h4>Total Updates</h4>
+                <p class="report-number"></p>
+            </div>
+            <div class="report-card">
+                <h4>Resources</h4>
+                <p class="report-number"></p>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h4>Usage Statistics (Last 7 Days)</h4>
+            <div class="chart-placeholder">
+                <p>Chart will be displayed here</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('.tab-btn').forEach(button => button.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+    document.getElementById(button.getAttribute('data-tab') + '-tab').classList.remove('hidden');
+}));
+</script>
+{% endblock %}
