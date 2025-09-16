@@ -8,9 +8,9 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
-      - key: https://zcnxzeccwiwgpmhwudgi.supabase.co
-        fromSecret: https://zcnxzeccwiwgpmhwudgi.supabase.co
-      - key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpjbnh6ZWNjd2l3Z3BtaHd1ZGdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4NzExMTQsImV4cCI6MjA3MzQ0NzExNH0.k15GsiyyAsb8R7FqdabTa9mAWCm-SJPPflpdJkxMs_M
-        fromSecret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpjbnh6ZWNjd2l3Z3BtaHd1ZGdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4NzExMTQsImV4cCI6MjA3MzQ0NzExNH0.k15GsiyyAsb8R7FqdabTa9mAWCm-SJPPflpdJkxMs_M
+      - key: SUPABASE_URL
+        fromSecret: SUPABASE_URL
+      - key: SUPABASE_KEY
+        fromSecret: SUPABASE_KEY
       - key: SECRET_KEY
         fromSecret: SECRET_KEY
